@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: mariadb:10.3
+    restart: always
+    container_name: db
+    ports:
+      - 3306:3306
+    volumes:
+      - prestashop16-db-volume:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: <ROOT_PASSWORD>
+      MYSQL_DATABASE: <DATABASE_NAME>
+
+  php:
+    build: ./images/php
+    restart: always
+    container_name: php
+    ports:
+      - 9000:9000
+    volumes:
+      - ./www:/var/www
+    depends_on: 
+      - db
+
+  nginx:
+    image: nginx:latest
+    restart: always
+    container_name: nginx
+    ports:
+      - 80:80
+    environment:
+      NGINX_PORT: <PORT_TO_LISTEN>
+      NGINX_DOMAIN: <SITE_DOMAIN_NAME>
+    volumes:
+      - ./nginx/templates:/etc/nginx/templates
+      - ./nginx/logs:/var/log/nginx
+      - ./www:/var/www
+    depends_on:
+      - php
+
+  pma:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    restart: always
+    ports:
+      - 8081:80
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    depends_on: 
+      - nginx
+
+volumes: 
+  prestashop16-db-volume:
+    

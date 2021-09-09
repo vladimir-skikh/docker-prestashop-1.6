@@ -1,0 +1,71 @@
+# За основу взят официальный .gitignore файл prestashop-1.6
+
+# Editors, tools and OS's
+
+.buildpath
+.htaccess
+.project
+.settings
+.idea
+.svn
+.DS_Store
+.sass-cache
+.vscode
+config.codekit
+*.sublime-project
+*.sublime-workspace
+composer.lock
+
+# Cache, temp and personal files
+
+cache/class_index.php
+cache/smarty/cache/*
+!cache/smarty/cache/index.php
+cache/smarty/compile/*
+!cache/smarty/compile/index.php
+cache/tcpdf/*
+!cache/tcpdf/index.php
+
+download/*
+
+img/*/*
+!img/admin/*
+!img/index.php
+!img/*/index.php
+
+log/*
+upload/*
+
+admin/autoupgrade/*
+admin/backups/*
+admin/import/*
+
+themes/*/cache/*
+admin/themes/*/cache/*
+
+# Config
+
+config/settings.inc.php
+config/settings.old.php
+config/xml/*
+!config/xml/themes/default.xml
+
+# Themes, modules and overrides
+
+admin/themes/default/sass/ie.sass
+admin/themes/default/sass/print.sass
+admin/themes/default/sass/screen.sass
+admin/themes/default/css/ie.css
+admin/themes/default/css/print.css
+admin/themes/default/css/screen.css
+
+# Translations and emails templates
+
+translations/*
+themes/*/lang/*
+themes/*/modules/*/translations/*.php
+
+# MISC
+
+*sitemap.xml
+robots.txt
